@@ -1,6 +1,9 @@
 {
-	"files.associations": {
-		"so_long.h": "c",
-		"get_next_line.h": "c"
-	}
+  "files.associations": {
+    "so_long.h": "c",
+    "get_next_line.h": "c",
+    "ft_printf.h": "c",
+    "libft.h": "c",
+    "stdlib.h": "c"
+  }
 }
