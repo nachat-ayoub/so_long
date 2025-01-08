@@ -1,4 +1,4 @@
-#include "so_long.h"
+#include "../so_long.h"
 
 int get_map_lines(char *map_path)
 {
@@ -19,13 +19,12 @@ int get_map_lines(char *map_path)
 	return (y);
 }
 
-void get_map(char *map_path, t_game *game)
+void check_map_walls(char *map_path, t_game *game)
 {
 	char *line;
 	int fd;
 	int y;
 	int size;
-
 
 	printf(RED "Map Lines are: %d\n" RESET, get_map_lines(map_path));
 	game->map = malloc(sizeof(char *) * get_map_lines(map_path));
@@ -38,6 +37,33 @@ void get_map(char *map_path, t_game *game)
 	{
 		size = ft_strlen(line);
 		// printf(GREEN "Line: %s" RESET, line);
+		if (line[size - 1] == '\n')
+			size--;
+		game->map[y] = ft_substr(line, 0, size);
+		y++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	close(fd);
+}
+
+void get_map(char *map_path, t_game *game)
+{
+	char *line;
+	int size;
+	int fd;
+	int y;
+
+	game->map_h = get_map_lines(map_path);
+	game->map = malloc(sizeof(char *) * game->map_h);
+	if (!game->map)
+		return ;
+	y = 0;
+	fd = open(map_path, O_RDONLY);
+	line = get_next_line(fd);
+	while (line)
+	{
+		size = ft_strlen(line);
 		if (line[size - 1] == '\n')
 			size--;
 		game->map[y] = ft_substr(line, 0, size);

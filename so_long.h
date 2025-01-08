@@ -14,23 +14,30 @@
 # define GREEN   "\033[32m"
 # define YELLOW  "\033[33m"
 # define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
 
-typedef struct s_game
+typedef struct	s_game
 {
-	void *mlx_ptr;
-	void *mlx_win;
-	int win_h;
-	int win_w;
-	char **map;
-	int player_x;
-	int player_y;
-	int player_frame;
-} t_game;
+	void	*mlx_ptr;
+	void	*mlx_win;
+	char	**map;
+	size_t	map_h;
+	size_t	map_w;
+	size_t	win_h;
+	size_t	win_w;
+	int		player_x;
+	int		player_y;
+	int		player_frame;
+}	t_game;
 
-void get_map(char *map_path, t_game *game);
-
-// void draw_map(void *mlx_ptr, void *mlx_win, t_game *game);
-// int get_map_width();
-// int get_map_height();
+void 	get_map(char *map_path, t_game *game);
+int		is_rectangular(t_game *game);
+int		is_map_valid(t_game *game);
+int		has_valid_walls(t_game *game);
+int		has_required_elements(t_game *game);
+int		has_valid_characters(t_game *game);
+int		is_path_valid(t_game *game);
+void    free_map(t_game *game);
 
 #endif
