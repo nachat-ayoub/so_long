@@ -40,13 +40,14 @@ int main(int argc, char **argv)
 {
 	t_game	*game;
 
-	if (argc < 2 || ft_strlen(argv[1]) <= 4 || ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 4))
+	if (argc != 2 || ft_strlen(argv[1]) <= 4 || ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 5) != 0)
 	{
 		ft_printf("\n[❌] invalid map argument");
 		return (1);
 	}
 	ft_printf("\n[✅] 😅 valid map\n");
-	game = malloc(sizeof(game));
+	// game = malloc(sizeof(game));
+	game = NULL;
 	if (!game)
 		return (0);
 	get_map(argv[1], game);

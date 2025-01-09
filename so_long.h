@@ -39,5 +39,6 @@ int		has_required_elements(t_game *game);
 int		has_valid_characters(t_game *game);
 int		is_path_valid(t_game *game);
 void    free_map(t_game *game);
+void	count_map_elms(t_game *game, int *e, int *p, int *c);
 
 #endif
