@@ -2,8 +2,8 @@
 
 void	count_map_elms(t_game *game, int *e, int *p, int *c)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = -1;
 	while (game->map && ++i < game->map_h)

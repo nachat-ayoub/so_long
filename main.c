@@ -1,60 +1,40 @@
 #include "so_long.h"
 
-// int is_map_valid(t_game *game)
-// {
-// 	int 	i;
-// 	size_t map_width;
+int is_valid(char *path)
+{
+	int		fd;
+	char	*line;
 
-	
-// 	i = 0;
-// 	while (game->map && i < game->win_h)
-// 	{ 
-// 		printf(BLUE "Line: %s\n" RESET, game->map[i]);
-// 		// rectangular map shape check
-// 		if (ft_strlen(game->map[i]) != map_width)
-// 			return (-1);
-// 		// walls check on left
-// 		if (game->map[i][0] != '1')
-// 					return (-3);
-// 		// walls check on right
-// 		if (game->map[i][game->win_w-1] != '1')
-// 					return (-2);
-// 		// walls check on top and bottom
-// 		if(i == 0 || i == game->win_h-1)
-// 		{;
-// 			int j = 0;
-// 			while (game->map[i][j])
-// 			{
-// 				if (game->map[i][j] != '1')
-// 					return (-1);
-// 				j++;
-// 			}
-			
-// 		}
-// 		i++;
-// 	}
-// 	return (1);
-// }
+	if (ft_strncmp(ft_strrchr(path, '.'), ".ber", 5) != 0)
+		return (0);
+	fd = open(path, O_RDONLY);
+	line = get_next_line(fd);
+	close(fd);
+	if (!line)
+		return (0);
+	return (free(line), 1);
+}
 
 int main(int argc, char **argv)
 {
 	t_game	*game;
 
-	if (argc != 2 || ft_strlen(argv[1]) <= 4 || ft_strncmp(ft_strrchr(argv[1], '.'), ".ber", 5) != 0)
+	if (argc != 2 || !is_valid(argv[1]))
 	{
 		ft_printf("\n[❌] invalid map argument");
 		return (1);
 	}
-	ft_printf("\n[✅] 😅 valid map\n");
-	// game = malloc(sizeof(game));
-	game = NULL;
+	ft_printf("\n[✅] 😅 valid map arg\n");
+	game = malloc(sizeof(game));
 	if (!game)
-		return (0);
-	get_map(argv[1], game);
+		return (1);
+	game->map = get_map(argv[1], game);
+	if (!game->map)
+		return (1);
 	game->map_w = ft_strlen(game->map[0]);
 
-	printf(YELLOW "Map W: %zu\n" RESET, game->map_w);
-	printf(YELLOW "Map H: %zu\n" RESET, game->map_h);
+	printf(YELLOW "Map W: %d\n" RESET, game->map_w);
+	printf(YELLOW "Map H: %d\n" RESET, game->map_h);
 	int res = is_map_valid(game);
 	if (res == 1)
 		printf(GREEN "=========[ Valid Map: %d ]=========\n" RESET, res);

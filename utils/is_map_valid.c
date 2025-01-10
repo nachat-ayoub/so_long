@@ -36,12 +36,14 @@ int	is_map_valid(t_game *game)
 // Checks if the map is rectangular (all rows have the same length).
 int	is_rectangular(t_game *game)
 {
-	size_t	i;
+	int map_w;
+	int	i;
 
 	i = 0;
+	map_w = ft_strlen(game->map[i]);
 	while (i < game->map_h)
 	{
-		if (ft_strlen(game->map[i]) != game->map_w)
+		if (map_w != game->map_w)
 			return (-1);
 		i++;
 	}
@@ -51,8 +53,8 @@ int	is_rectangular(t_game *game)
 // Validates that the map is surrounded by walls ('1') on all edges.
 int	has_valid_walls(t_game *game)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (game->map && i < game->map_h)
@@ -99,8 +101,8 @@ int	has_required_elements(t_game *game)
 // Checks if all characters in the map are valid (e.g., '0', '1', 'C', 'E', 'P').
 int		has_valid_characters(t_game *game)
 {
-	size_t	i;
-	size_t	j;
+	int	i;
+	int	j;
 	char	c;
 
 	i = -1;

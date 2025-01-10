@@ -1,16 +1,16 @@
 #include "../so_long.h"
 
-void    free_map(t_game *game)
+void    free_map(char **map, int size)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
-	while (i < game->map_h)
+	while (i < size)
 	{
-		free(game->map[i]);
-		game->map[i] = NULL;
+		free(map[i]);
+		map[i] = NULL;
 		i++;
 	}
-	free(game->map);
-	game->map = NULL;
+	free(map);
+	map = NULL;
 }
