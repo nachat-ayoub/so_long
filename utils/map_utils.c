@@ -67,6 +67,8 @@ void get_map(char *map_path, t_game *game)
 		if (line[size - 1] == '\n')
 			size--;
 		game->map[y] = ft_substr(line, 0, size);
+		// if (!game->map[y])
+		// 	return ;
 		y++;
 		free(line);
 		line = get_next_line(fd);

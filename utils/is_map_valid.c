@@ -25,6 +25,11 @@ int	is_map_valid(t_game *game)
 		res = -4;
 		printf(MAGENTA "[MAP] map has invalid characters\n" RESET);
 	}
+	else if (is_path_valid(game) != 1)
+	{
+		res = -5;
+		printf(MAGENTA "[MAP] map has invalid path\n" RESET);
+	}
 	return (res);
 }
 

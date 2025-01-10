@@ -21,7 +21,7 @@
 // 					return (-2);
 // 		// walls check on top and bottom
 // 		if(i == 0 || i == game->win_h-1)
-// 		{
+// 		{;
 // 			int j = 0;
 // 			while (game->map[i][j])
 // 			{
