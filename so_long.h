@@ -27,14 +27,20 @@ typedef struct	s_game
 {
 	void	*mlx_ptr;
 	void	*mlx_win;
+	void	*img_wall;
+	void	*img_bg;
+	void	*img_player;
+	void	*img_exit;
+	void	*img_collect;
 	char	**map;
+	int		b_size;
 	int		map_h;
 	int		map_w;
 	int		win_h;
 	int		win_w;
 	int		player_x;
 	int		player_y;
-	int		player_frame;
+	int		collects;
 }	t_game;
 
 char	**get_map(char *map_path, t_game *game);
@@ -46,5 +52,6 @@ int		has_valid_characters(t_game *game);
 int		is_path_valid(t_game *game);
 void    free_map(char **map, int size);
 void	count_map_elms(t_game *game, int *e, int *p, int *c);
+int		count_char(char *str, char c);
 
 #endif

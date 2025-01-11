@@ -1,6 +1,5 @@
 #include "../so_long.h"
 
-
 char	**copy_map(t_game *game)
 {
 	char	**map;
@@ -15,6 +14,7 @@ char	**copy_map(t_game *game)
 		map[i] = ft_strdup(game->map[i]);
 		if (!map[i])
 			return (free_map(map, i), NULL);
+		game->collects += count_char(map[i], 'C');
 		i++;
 	}
 	return (map);
@@ -87,7 +87,7 @@ int is_map_filled(char **map, int size)
 		j = 0;
 		while (map[i][j])
 		{
-			if(map[i][j] != '1' && map[i][j] != 'f')
+			if(map[i][j] != '1' && map[i][j] != 'f' && map[i][j] != '0')
 				return (-1);
 			j++;
 		}
@@ -106,17 +106,12 @@ int	is_path_valid(t_game *game)
 	map = copy_map(game);
 	if (!map)
 		return (free_map(game->map, game->map_h), -1);
-	printf("\n====> Printing MAP [Before]:\n");
-	print_map(map, game->map_h);
-	printf("\n");
-
 	pos = get_char_pos(game, 'P');
 	if(!pos)
 		return (free_map(map, game->map_h), free_map(game->map, game->map_h), -1);
+	game->player_x = pos->x;
+	game->player_y = pos->y;
 	flood_fill(game, map, pos->y, pos->x);
-	printf("\n====> Printing MAP [After]:\n");
-	print_map(map, game->map_h);
-	printf("\n");
 	if (is_map_filled(map, game->map_h) == -1)
 		return (-1);
 	return (1);
