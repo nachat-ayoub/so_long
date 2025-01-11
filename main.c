@@ -15,30 +15,38 @@ int is_valid(char *path)
 	return (free(line), 1);
 }
 
+void	init_game(t_game *game)
+{
+	void	*mlx;
+	void	*win;
+
+	mlx = mlx_init();
+	if (!mlx)
+		return (1);
+	game->mlx_ptr = mlx;
+	win = mlx_new_window(mlx, game->map_w * BLOCK_SIZE, game->map_h * BLOCK_SIZE, "so_long");
+	game->mlx_win = win;
+}
+
 int main(int argc, char **argv)
 {
 	t_game	*game;
 
-	if (argc != 2 || !is_valid(argv[1]))
+	if (argc == 2 && is_valid(argv[1]))
 	{
-		ft_printf("\n[❌] invalid map argument");
-		return (1);
+		game = malloc(sizeof(game));
+		if (!game)
+			return (1);
+		game->map = get_map(argv[1], game);
+		if (!game->map)
+			return (1);
+		game->map_w = ft_strlen(game->map[0]);
+		int res = is_map_valid(game);
+		if (res != 1)
+		{
+			perror("Error\nInvalide map");
+		}
 	}
-	ft_printf("\n[✅] 😅 valid map arg\n");
-	game = malloc(sizeof(game));
-	if (!game)
-		return (1);
-	game->map = get_map(argv[1], game);
-	if (!game->map)
-		return (1);
-	game->map_w = ft_strlen(game->map[0]);
-
-	printf(YELLOW "Map W: %d\n" RESET, game->map_w);
-	printf(YELLOW "Map H: %d\n" RESET, game->map_h);
-	int res = is_map_valid(game);
-	if (res == 1)
-		printf(GREEN "=========[ Valid Map: %d ]=========\n" RESET, res);
-	else
-		printf(RED   "=========[ Invalid Map: %d ]=========\n" RESET, res);
+	perror("Error\nInvalide map arg");
 	return (0);
 }
