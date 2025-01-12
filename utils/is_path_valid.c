@@ -114,5 +114,6 @@ int	is_path_valid(t_game *game)
 	flood_fill(game, map, pos->y, pos->x);
 	if (is_map_filled(map, game->map_h) == -1)
 		return (-1);
+	game->map[pos->y][pos->x] = '0';
 	return (1);
 }

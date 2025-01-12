@@ -83,6 +83,57 @@ void draw_map(t_game *g)
 	}
 	mlx_put_image_to_window(g->mlx_ptr, g->mlx_win, g->img_player, g->b_size * g->player_x, g->b_size * g->player_y);
 }
+void exit_game(t_game *game)
+{
+	mlx_destroy_window(game->mlx_ptr, game->mlx_win);
+	free(game->map);
+	free(game->mlx_ptr);
+	free(game);
+	exit(0);
+}
+
+int	handle_input(int key, t_game *game)
+{
+	int	x;
+	int	y;
+
+	x = game->player_x;
+	y = game->player_y;
+	if (key == 53)
+	{ // ESC
+		exit_game(game);
+	}
+	if (key == 13) // W: Up
+		y -= 1;
+	else if (key == 1) // S: Down
+		y += 1;
+	else if (key == 0) // A: Left
+		x -= 1;
+	else if (key == 2) // D: Right
+		x += 1;
+	if (game->map[y][x] != '1') // change player os if correct 
+	{
+		game->player_x = x;
+		game->player_y = y;
+	}
+
+
+
+	if (game->map[y][x] == 'C')
+	{
+		if (game->collects != 0)
+			game->collects--;
+		game->map[y][x] = '0';
+		printf("coins: %d\n", game->collects);
+	}
+	else if (game->map[y][x] == 'E')
+	{
+		if (game->collects == 0)
+			exit_game(game);
+	}
+	draw_map(game);
+	return (0);
+}
 
 int main(int argc, char **argv)
 {
@@ -112,7 +163,7 @@ int main(int argc, char **argv)
 			return (1);
 		}
 		draw_map(game);
-		printf("Map Collectibles are: %d\n\n", game->collects);
+		mlx_key_hook(game->mlx_win, handle_input, game);
 		mlx_loop(game->mlx_ptr);
 		return (0);
 	}
