@@ -96,8 +96,7 @@ int is_map_filled(char **map, int size)
 	return (1);
 }
 
-// Ensures the player can reach all collectibles
-// and the exit from the starting position.
+
 int	is_path_valid(t_game *game)
 {
 	char	**map;

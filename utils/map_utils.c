@@ -11,9 +11,10 @@ int get_map_lines(char *map_path)
 	if (!line)
 		return (0);
 	y = 0;
-	while (line)
+	while (line != NULL)
 	{
 		y++;
+		printf("===> Line: %s\n", line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -30,7 +31,7 @@ char **get_map(char *map_path, t_game *game)
 	int y;
 
 	game->map_h = get_map_lines(map_path);
-	map = malloc(sizeof(char *) * game->map_h);
+	map = malloc(sizeof(char *) * (game->map_h + 1));
 	if (!map)
 		return (NULL);
 	y = 0;

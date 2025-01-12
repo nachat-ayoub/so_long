@@ -54,5 +54,6 @@ int		is_path_valid(t_game *game);
 void    free_map(char **map, int size);
 void	count_map_elms(t_game *game, int *e, int *p, int *c);
 int		count_char(char *str, char c);
+void print_map(char **map, int size);
 
 #endif

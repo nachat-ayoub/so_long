@@ -2,17 +2,19 @@
 
 int is_valid(char *path)
 {
-	int		fd;
-	char	*line;
+	// int		fd;
+	// char	*line;
 
 	if (ft_strncmp(ft_strrchr(path, '.'), ".ber", 5) != 0)
 		return (0);
-	fd = open(path, O_RDONLY);
-	line = get_next_line(fd);
-	close(fd);
-	if (!line)
-		return (0);
-	return (free(line), 1);
+	return (1);
+	// fd = open(path, O_RDONLY);
+	// line = get_next_line(fd);
+	// close(fd);
+	// if (!line)
+	// 	return (0);
+	// get_next_line(-1);
+	// return (free(line), 1);
 }
 
 void	*load_img(void *mlx, char *img_path, int *size)
@@ -69,6 +71,8 @@ void draw_map(t_game *g)
 	int		i;
 	int		j;
 
+	print_map(g->map, g->map_h);
+	printf("map h: %d\n", g->map_h);
 	i = 0;
 	while (i < g->map_h)
 	{
