@@ -93,6 +93,12 @@ void exit_game(t_game *game)
 	exit(0);
 }
 
+int handle_close(t_game *game)
+{
+	exit_game(game);
+	return (0);
+}
+
 int	handle_input(int key, t_game *game)
 {
 	int	x;
@@ -101,25 +107,25 @@ int	handle_input(int key, t_game *game)
 	x = game->player_x;
 	y = game->player_y;
 	if (key == 53)
-	{ // ESC
 		exit_game(game);
-	}
-	if (key == 13) // W: Up
+	if (key == 13)
 		y -= 1;
-	else if (key == 1) // S: Down
+	else if (key == 1)
 		y += 1;
-	else if (key == 0) // A: Left
+	else if (key == 0)
 		x -= 1;
-	else if (key == 2) // D: Right
+	else if (key == 2)
 		x += 1;
-	if (game->map[y][x] != '1') // change player os if correct 
+	if (game->map[y][x] != '1')
 	{
+		if (game->player_x != x || game->player_y != y)
+		{
+			game->movements++;
+			ft_printf("player moves: %d\n", game->movements);
+		}
 		game->player_x = x;
 		game->player_y = y;
 	}
-
-
-
 	if (game->map[y][x] == 'C')
 	{
 		if (game->collects != 0)
@@ -163,6 +169,7 @@ int main(int argc, char **argv)
 			return (1);
 		}
 		draw_map(game);
+		mlx_hook(game->mlx_win, 17, 0, handle_close, game);
 		mlx_key_hook(game->mlx_win, handle_input, game);
 		mlx_loop(game->mlx_ptr);
 		return (0);
