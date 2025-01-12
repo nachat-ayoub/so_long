@@ -38,6 +38,7 @@ int	init_game(t_game *g)
 	g->img_player = load_img(g->mlx_ptr, "./assets/player/1.xpm", &size);
 	g->img_exit = load_img(g->mlx_ptr, "./assets/exit.xpm", &size);
 	g->img_collect = load_img(g->mlx_ptr, "./assets/test.xpm", &size);
+	g->movements = 0;
 	return (0);
 }
 
@@ -124,7 +125,6 @@ int	handle_input(int key, t_game *game)
 		if (game->collects != 0)
 			game->collects--;
 		game->map[y][x] = '0';
-		printf("coins: %d\n", game->collects);
 	}
 	else if (game->map[y][x] == 'E')
 	{

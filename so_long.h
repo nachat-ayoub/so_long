@@ -41,6 +41,7 @@ typedef struct	s_game
 	int		player_x;
 	int		player_y;
 	int		collects;
+	int		movements;
 }	t_game;
 
 char	**get_map(char *map_path, t_game *game);
