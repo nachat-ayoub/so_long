@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/12 15:26:35 by anachat           #+#    #+#             */
+/*   Updated: 2025/01/12 15:36:50 by anachat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
-int get_map_lines(char *map_path)
+static int	get_map_lines(char *map_path)
 {
-	char *line;
-	int fd;
-	int y;
+	char	*line;
+	int		fd;
+	int		y;
 
 	fd = open(map_path, O_RDONLY);
 	line = get_next_line(fd);
@@ -14,7 +26,6 @@ int get_map_lines(char *map_path)
 	while (line != NULL)
 	{
 		y++;
-		printf("===> Line: %s\n", line);
 		free(line);
 		line = get_next_line(fd);
 	}
@@ -22,18 +33,13 @@ int get_map_lines(char *map_path)
 	return (y);
 }
 
-char **get_map(char *map_path, t_game *game)
+static char	**read_map(char *map_path, char **map)
 {
-	char **map;
-	char *line;
-	int size;
-	int fd;
-	int y;
+	char	*line;
+	int		size;
+	int		fd;
+	int		y;
 
-	game->map_h = get_map_lines(map_path);
-	map = malloc(sizeof(char *) * (game->map_h + 1));
-	if (!map)
-		return (NULL);
 	y = 0;
 	fd = open(map_path, O_RDONLY);
 	line = get_next_line(fd);
@@ -50,4 +56,15 @@ char **get_map(char *map_path, t_game *game)
 		line = get_next_line(fd);
 	}
 	return (close(fd), map);
+}
+
+char	**get_map(char *map_path, t_game *game)
+{
+	char	**map;
+
+	game->map_h = get_map_lines(map_path);
+	map = malloc(sizeof(char *) * (game->map_h));
+	if (!map)
+		return (NULL);
+	return (read_map(map_path, map));
 }

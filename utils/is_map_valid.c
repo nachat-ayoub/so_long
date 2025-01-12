@@ -1,42 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_map_valid.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/12 16:00:30 by anachat           #+#    #+#             */
+/*   Updated: 2025/01/12 16:07:56 by anachat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 int	is_map_valid(t_game *game)
 {
-	int res;
+	int	res;
 
 	res = 1;
 	if (is_rectangular(game) != 1)
 	{
 		res = -1;
-		printf(MAGENTA "[MAP] map is not rectangular\n" RESET);
+		ft_printf(MAGENTA "[MAP] map is not rectangular\n" RESET);
 	}
 	else if (has_valid_walls(game) != 1)
 	{
 		res = -2;
-		printf(MAGENTA "[MAP] map does not have walls on sides\n" RESET);
+		ft_printf(MAGENTA "[MAP] map does not have walls on sides\n" RESET);
 	}
-	else if (has_required_elements(game) != 1)
+	else if (has_required_chars(game) != 1)
 	{
 		res = -3;
-		printf(MAGENTA "[MAP] map does not have correct elements\n" RESET);
+		ft_printf(MAGENTA "[MAP] map does not have correct elements\n" RESET);
 	}
-	else if (has_valid_characters(game) != 1)
+	else if (has_valid_chas(game) != 1)
 	{
 		res = -4;
-		printf(MAGENTA "[MAP] map has invalid characters\n" RESET);
+		ft_printf(MAGENTA "[MAP] map has invalid characters\n" RESET);
 	}
 	else if (is_path_valid(game) != 1)
 	{
 		res = -5;
-		printf(MAGENTA "[MAP] map has invalid path\n" RESET);
+		ft_printf(MAGENTA "[MAP] map has invalid path\n" RESET);
 	}
 	return (res);
 }
 
-// Checks if the map is rectangular (all rows have the same length).
 int	is_rectangular(t_game *game)
 {
-	int map_w;
+	int	map_w;
 	int	i;
 
 	i = 0;
@@ -50,7 +61,6 @@ int	is_rectangular(t_game *game)
 	return (1);
 }
 
-// Validates that the map is surrounded by walls ('1') on all edges.
 int	has_valid_walls(t_game *game)
 {
 	int	i;
@@ -59,13 +69,10 @@ int	has_valid_walls(t_game *game)
 	i = 0;
 	while (game->map && i < game->map_h)
 	{
-		// walls check on left
 		if (game->map[i][0] != '1')
 			return (-1);
-		// walls check on right
 		if (game->map[i][game->map_w - 1] != '1')
 			return (-1);
-		// walls check on top and bottom
 		if (i == 0 || i == game->map_h - 1)
 		{
 			j = 0;
@@ -81,13 +88,11 @@ int	has_valid_walls(t_game *game)
 	return (1);
 }
 
-// Checks if the map contains at least one collectible
-// ('C'), one exit ('E'), and one starting position ('P').
-int	has_required_elements(t_game *game)
+int	has_required_chars(t_game *game)
 {
-	int		e;
-	int		p;
-	int		c;
+	int	e;
+	int	p;
+	int	c;
 
 	e = 0;
 	p = 0;
@@ -98,11 +103,10 @@ int	has_required_elements(t_game *game)
 	return (1);
 }
 
-// Checks if all characters in the map are valid (e.g., '0', '1', 'C', 'E', 'P').
-int		has_valid_characters(t_game *game)
+int	has_valid_chas(t_game *game)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 	char	c;
 
 	i = -1;

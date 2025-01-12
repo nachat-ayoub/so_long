@@ -1,50 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extra_utils.c                                      :+:      :+:    :+:   */
+/*   render_map.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/12 15:39:30 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/12 15:39:36 by anachat          ###   ########.fr       */
+/*   Created: 2025/01/12 15:04:10 by anachat           #+#    #+#             */
+/*   Updated: 2025/01/12 15:25:11 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	count_map_elms(t_game *game, int *e, int *p, int *c)
+void	draw_map(t_game *g)
 {
-	int	i;
-	int	j;
+	void	*img;
+	int		x;
+	int		y;
 
-	i = -1;
-	while (game->map && ++i < game->map_h)
+	y = 0;
+	while (y < g->map_h)
 	{
-		j = -1;
-		while (game->map[i][++j])
+		x = 0;
+		while (g->map[y][x])
 		{
-			if (game->map[i][j] == 'E')
-				(*e)++;
-			if (game->map[i][j] == 'P')
-				(*p)++;
-			if (game->map[i][j] == 'C')
-				(*c)++;
+			img = get_img(g, y, x);
+			if (img)
+				put_img(g, img, g->b_size * x, g->b_size * y);
+			x++;
 		}
+		y++;
 	}
-}
-
-int	count_char(char *str, char c)
-{
-	int	count;
-	int	i;
-
-	count = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == c)
-			count++;
-		i++;
-	}
-	return (count);
+	x = g->b_size * g->pl_x;
+	y = g->b_size * g->pl_y;
+	put_img(g, g->img_pl, x, y);
 }

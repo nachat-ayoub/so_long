@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_path_valid.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/12 15:37:01 by anachat           #+#    #+#             */
+/*   Updated: 2025/01/12 15:54:09 by anachat          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../so_long.h"
 
 char	**copy_map(t_game *game)
@@ -14,7 +26,7 @@ char	**copy_map(t_game *game)
 		map[i] = ft_strdup(game->map[i]);
 		if (!map[i])
 			return (free_map(map, i), NULL);
-		game->collects += count_char(map[i], 'C');
+		game->coins += count_char(map[i], 'C');
 		i++;
 	}
 	return (map);
@@ -66,17 +78,7 @@ t_pos	*get_char_pos(t_game *game, char c)
 	return (pos);
 }
 
-void print_map(char **map, int size)
-{
-	int i = 0;
-	while (i < size)
-	{
-		printf(YELLOW "%s\n" RESET, map[i]);
-		i++;
-	}
-}
-
-int is_map_filled(char **map, int size)
+int	is_map_filled(char **map, int size)
 {
 	int	i;
 	int	j;
@@ -87,7 +89,7 @@ int is_map_filled(char **map, int size)
 		j = 0;
 		while (map[i][j])
 		{
-			if(map[i][j] != '1' && map[i][j] != 'f' && map[i][j] != '0')
+			if (map[i][j] != '1' && map[i][j] != 'f' && map[i][j] != '0')
 				return (-1);
 			j++;
 		}
@@ -95,7 +97,6 @@ int is_map_filled(char **map, int size)
 	}
 	return (1);
 }
-
 
 int	is_path_valid(t_game *game)
 {
@@ -106,10 +107,13 @@ int	is_path_valid(t_game *game)
 	if (!map)
 		return (free_map(game->map, game->map_h), -1);
 	pos = get_char_pos(game, 'P');
-	if(!pos)
-		return (free_map(map, game->map_h), free_map(game->map, game->map_h), -1);
-	game->player_x = pos->x;
-	game->player_y = pos->y;
+	if (!pos)
+	{
+		free_map(map, game->map_h);
+		return (free_map(game->map, game->map_h), -1);
+	}
+	game->pl_x = pos->x;
+	game->pl_y = pos->y;
 	flood_fill(game, map, pos->y, pos->x);
 	if (is_map_filled(map, game->map_h) == -1)
 		return (-1);
