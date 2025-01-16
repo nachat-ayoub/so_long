@@ -15,6 +15,9 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 15
 # endif
+# ifndef OPEN_MAX
+#  define OPEN_MAX 10240
+# endif
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
