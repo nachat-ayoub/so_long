@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 14:51:01 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/12 16:17:09 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/16 12:50:06 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,7 @@ static int	setup_game(char *map_path, t_game **game)
 	if (!(*game)->map)
 		return (1);
 	(*game)->map_w = ft_strlen((*game)->map[0]);
-	if (is_map_valid(*game) != 1)
-	{
-		perror("Error\n");
-		return (1);
-	}
+	is_map_valid(*game);
 	if (init_game(*game))
 	{
 		perror("Error\n");
@@ -48,7 +44,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 2 || !is_valid_arg(argv[1]))
 	{
-		perror("Error\n");
+		handle_error("invalid map arg", NULL, 0);
 		return (1);
 	}
 	if (setup_game(argv[1], &game))

@@ -6,6 +6,7 @@
     "libft.h": "c",
     "stdlib.h": "c",
     "__locale": "c",
-    "ios": "c"
+    "ios": "c",
+    "stdio.h": "c"
   }
 }

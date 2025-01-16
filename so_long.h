@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:58:53 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/12 16:04:09 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/16 12:06:43 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,7 @@ typedef struct s_game
 }	t_game;
 
 char	**get_map(char *map_path, t_game *game);
-int		is_rectangular(t_game *game);
 int		is_map_valid(t_game *game);
-int		has_valid_walls(t_game *game);
-int		has_required_chars(t_game *game);
-int		has_valid_chas(t_game *game);
 int		is_path_valid(t_game *game);
 void	free_map(char **map, int size);
 void	count_map_elms(t_game *game, int *e, int *p, int *c);
@@ -74,5 +70,6 @@ void	draw_map(t_game *g);
 void	*load_img(void *mlx, char *img_path, int *size);
 void	*get_img(t_game *g, int y, int x);
 int		put_img(t_game *g, void *img, int x, int y);
+int		handle_error(char *msg, t_game *g, int code);
 
 #endif

@@ -6,19 +6,29 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:19:19 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/12 15:55:49 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/16 12:09:04 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
+void	destroy_images(t_game *g)
+{
+	mlx_destroy_image(g->mlx, g->img_bg);
+	mlx_destroy_image(g->mlx, g->img_coins);
+	mlx_destroy_image(g->mlx, g->img_exit);
+	mlx_destroy_image(g->mlx, g->img_pl);
+	mlx_destroy_image(g->mlx, g->img_wall);
+}
+
 void	exit_game(t_game *game)
 {
-	mlx_destroy_window(game->mlx, game->win);
 	free(game->map);
+	mlx_destroy_window(game->mlx, game->win);
+	destroy_images(game);
 	free(game->mlx);
 	free(game);
-	exit(0);
+	exit(1);
 }
 
 int	handle_close(t_game *game)
