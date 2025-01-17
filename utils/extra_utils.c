@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:39:30 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/16 11:58:08 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/16 14:38:14 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,8 @@ int	count_char(char *str, char c)
 
 int	handle_error(char *msg, t_game *g, int code)
 {
-	int fd;
-	fd = 2;
-	ft_putstr_fd("Error\n", fd);
-	ft_putstr_fd(msg, fd);
+	ft_putstr_fd("Error\n", 2);
+	ft_putstr_fd(msg, 2);
 	if(code == -1)
 		return (free(g->map), free(g), exit(1), 1);
 	if(code == -2)
