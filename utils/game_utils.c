@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:19:19 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/18 16:20:05 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 16:44:34 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int	init_game(t_game *g)
 	win_w = g->map_w * size;
 	win_h = g->map_h * size;
 	g->b_size = size;
-	g->img_wall = load_img(g->mlx, "./assets/wall.xpm", &size, g);
-	g->img_bg = load_img(g->mlx, "./assets/brick.xpm", &size, g);
-	g->img_pl = load_img(g->mlx, "./assets/player/1.xpm", &size, g);
-	g->img_exit = load_img(g->mlx, "./assets/exit.xpm", &size, g);
-	g->img_coins = load_img(g->mlx, "./assets/test.xpm", &size, g);
+	g->img_wall = load_img(g->mlx, "./textures/wall.xpm", &size, g);
+	g->img_bg = load_img(g->mlx, "./textures/brick.xpm", &size, g);
+	g->img_pl = load_img(g->mlx, "./textures/player_1.xpm", &size, g);
+	g->img_exit = load_img(g->mlx, "./textures/exit.xpm", &size, g);
+	g->img_coins = load_img(g->mlx, "./textures/olive.xpm", &size, g);
 	g->moves = 0;
 	g->win = mlx_new_window(g->mlx, win_w, win_h, "so_long");
 	return (0);

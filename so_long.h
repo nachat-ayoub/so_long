@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:58:53 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/18 16:06:35 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 16:36:32 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "./lib/get_next_line/get_next_line.h"
 # include "./lib/ft_printf/ft_printf.h"
 # include "./lib/libft/libft.h"
+
 # define BLOCK_SIZE 50
 # define KEY_ESC 53
 # define KEY_UP 13
@@ -27,13 +28,8 @@
 # define KEY_LEFT 0
 # define KEY_RIGHT 2
 
-# define RESET   "\033[0m"
 # define RED     "\033[31m"
-# define GREEN   "\033[32m"
-# define YELLOW  "\033[33m"
-# define BLUE    "\033[34m"
-# define MAGENTA "\033[35m"
-# define CYAN    "\033[36m"
+# define RESET   "\033[0m"
 
 typedef struct s_pos
 {
