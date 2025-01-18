@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:39:56 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/12 15:55:33 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 15:57:27 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static void	move_player(int key, t_game *g)
 
 	x = g->pl_x;
 	y = g->pl_y;
-	if (key == 53)
+	if (key == KEY_ESC)
 		exit_game(g);
-	else if (key == 13)
+	else if (key == KEY_UP)
 		y -= 1;
-	else if (key == 1)
+	else if (key == KEY_DOWN)
 		y += 1;
-	else if (key == 0)
+	else if (key == KEY_LEFT)
 		x -= 1;
-	else if (key == 2)
+	else if (key == KEY_RIGHT)
 		x += 1;
 	if (g->map[y][x] != '1')
 	{
@@ -35,9 +35,9 @@ static void	move_player(int key, t_game *g)
 		{
 			g->moves++;
 			ft_printf("player moves: %d\n", g->moves);
+			g->pl_x = x;
+			g->pl_y = y;
 		}
-		g->pl_x = x;
-		g->pl_y = y;
 	}
 }
 

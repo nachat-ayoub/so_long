@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:58:53 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/16 12:06:43 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 16:06:35 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@
 # include "./lib/ft_printf/ft_printf.h"
 # include "./lib/libft/libft.h"
 # define BLOCK_SIZE 50
+# define KEY_ESC 53
+# define KEY_UP 13
+# define KEY_DOWN 1
+# define KEY_LEFT 0
+# define KEY_RIGHT 2
+
 # define RESET   "\033[0m"
 # define RED     "\033[31m"
 # define GREEN   "\033[32m"
@@ -67,9 +73,9 @@ int		handle_close(t_game *game);
 void	exit_game(t_game *game);
 int		init_game(t_game *g);
 void	draw_map(t_game *g);
-void	*load_img(void *mlx, char *img_path, int *size);
+void	*load_img(void *mlx, char *img, int *size, t_game *g);
 void	*get_img(t_game *g, int y, int x);
 int		put_img(t_game *g, void *img, int x, int y);
-int		handle_error(char *msg, t_game *g, int code);
+int		handle_error(char *msg, t_game *g);
 
 #endif

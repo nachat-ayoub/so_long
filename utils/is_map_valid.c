@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 16:00:30 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/16 12:05:46 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 15:21:09 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,17 +93,14 @@ static int	has_valid_chars(t_game *game)
 int	is_map_valid(t_game *g)
 {
 	if (is_rectangular(g) != 1)
-		return (handle_error("map is not rectangular", g, -1), 0);
+		return (handle_error("Map is not rectangular", g), 0);
 	else if (has_valid_walls(g) != 1)
-		return (handle_error("map does not have walls on borders", g, -1), 0);
+		return (handle_error("Map does not have walls on borders", g), 0);
 	else if (has_required_chars(g) != 1)
-	{
-		handle_error("map does not have required characters", g, -1);
-		return (0);
-	}
+		return (handle_error("Map does not have required chars", g), 0);
 	else if (has_valid_chars(g) != 1)
-		return (handle_error("map has invalid characters", g, -1), 0);
+		return (handle_error("Map has invalid chars", g), 0);
 	else if (is_path_valid(g) != 1)
-		return (handle_error("map has invalid path", g, -1), 0);
+		return (handle_error("Map has invalid path", g), 0);
 	return (1);
 }

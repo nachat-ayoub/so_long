@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:37:01 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/12 15:54:09 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 16:15:43 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_pos	*get_char_pos(t_game *game, char c)
 		}
 		i++;
 	}
-	return (pos);
+	return (free(pos), NULL);
 }
 
 int	is_map_filled(char **map, int size)
@@ -100,23 +100,25 @@ int	is_map_filled(char **map, int size)
 
 int	is_path_valid(t_game *game)
 {
-	char	**map;
+	char	**tmp_map;
 	t_pos	*pos;
+	int		res;
 
-	map = copy_map(game);
-	if (!map)
-		return (free_map(game->map, game->map_h), -1);
+	tmp_map = copy_map(game);
+	if (!tmp_map)
+		return (handle_error("Allocation error", game), -1);
 	pos = get_char_pos(game, 'P');
 	if (!pos)
 	{
-		free_map(map, game->map_h);
-		return (free_map(game->map, game->map_h), -1);
+		free_map(tmp_map, game->map_h);
+		return (handle_error("Allocation error", game), -1);
 	}
 	game->pl_x = pos->x;
 	game->pl_y = pos->y;
-	flood_fill(game, map, pos->y, pos->x);
-	if (is_map_filled(map, game->map_h) == -1)
-		return (-1);
-	game->map[pos->y][pos->x] = '0';
-	return (1);
+	free(pos);
+	flood_fill(game, tmp_map, game->pl_y, game->pl_x);
+	res = is_map_filled(tmp_map, game->map_h);
+	free_map(tmp_map, game->map_h);
+	game->map[game->pl_y][game->pl_x] = '0';
+	return (res);
 }

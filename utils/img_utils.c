@@ -6,17 +6,19 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:22:56 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/12 15:24:54 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 16:06:47 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../so_long.h"
 
-void	*load_img(void *mlx, char *img_path, int *size)
+void	*load_img(void *mlx, char *img, int *size, t_game *g)
 {
 	void	*ptr;
 
-	ptr = mlx_xpm_file_to_image(mlx, img_path, size, size);
+	ptr = mlx_xpm_file_to_image(mlx, img, size, size);
+	if (!ptr)
+		return (handle_error("Failed to load images", g), NULL);
 	return (ptr);
 }
 
