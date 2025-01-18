@@ -6,7 +6,7 @@
 /*   By: anachat <anachat@student.1337.ma>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 15:58:53 by anachat           #+#    #+#             */
-/*   Updated: 2025/01/18 16:36:32 by anachat          ###   ########.fr       */
+/*   Updated: 2025/01/18 16:56:12 by anachat          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <mlx.h>
-# include "./lib/get_next_line/get_next_line.h"
-# include "./lib/ft_printf/ft_printf.h"
-# include "./lib/libft/libft.h"
+# include "../lib/get_next_line/get_next_line.h"
+# include "../lib/ft_printf/ft_printf.h"
+# include "../lib/libft/libft.h"
 
 # define BLOCK_SIZE 50
 # define KEY_ESC 53
